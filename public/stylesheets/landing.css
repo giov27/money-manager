@@ -1,0 +1,118 @@
+.profilePic{
+    width: 50px;
+    height: 50px;
+    border-radius: 20px;
+}
+
+.bgNavbar{
+    background-color:#383047;
+    border-bottom: 2px solid #000000;
+    box-sizing: border-box;
+    box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.btnLogout{
+    color: white;
+    background-color: #FA7844;
+    padding: 0.5rem 2rem;
+    border-radius: 15px;
+    border: none;
+    font-weight:800;
+}
+
+.navTitle{
+    font-weight: 900;
+    font-size: 18px;
+}
+
+.profileName{
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.profileDesc{
+    color: hsl(0deg 0% 75%);
+    margin-top: 0;
+    font-size: 12px;
+}
+
+/* Landing */
+.landing{
+    height: 100vh;
+    width: 100vw;
+    background-color:#352D43;
+    padding-top: 3.2rem;
+}
+
+.plusSection{
+    position:relative;
+    top:-0.5rem;
+}
+
+/* Card */
+.cardDate{
+    margin-top:1rem;
+    background-color:#8A7CFB !important;
+    height: 5rem;
+}
+
+.dateButton{
+    color: #fff !important;
+    text-shadow: 1px 1px 1px #ccc;
+    font-size: 1.2rem !important;
+}
+
+.cardBalance{
+    background-color: #50485D !important;
+    border-radius:15px !important;
+    position: absolute;
+    z-index:3;
+    top:-2rem;
+    box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.25);
+    font-size:18px;
+}
+
+.date{
+    font-weight:700;
+}
+.bg-card{
+    background-color: #3D344C !important;
+}
+
+.cardTitle{
+    font-weight: 700;
+}
+
+.textBalance{
+    font-weight:800;
+}
+
+.textCurrent{
+    font-weight:700;
+}
+
+.borderBottom{
+    padding-bottom:10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3)
+}
+
+.btn-circle {
+  width: 32px;
+  height: 32px;
+  padding: 0 !important;
+  border-radius: 30px !important;
+}
+
+
+
+/*Footer */
+.footTitle{
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.footAuthor{
+    opacity: 80%;
+    margin-top: 0;
+    font-size: 10px;
+}

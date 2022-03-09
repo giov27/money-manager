@@ -1,0 +1,60 @@
+@()
+
+@main("Welcome to Play") {
+<nav class="navbar justify-content-between px-5 align-items-center fixed-top bgNavbar text-white">
+    <div class="container">
+            <div class="d-flex">
+                <img class="profilePic" src="@routes.Assets.versioned("images/profilePic.png")" />
+                <div class="my-auto ms-3">
+                    <p class="profileName my-auto">Giov <br> <span class="profileDesc">Programmer</span></p>
+<!--                    <p>Programmer</p>-->
+                </div>
+            </div>
+            <div class="">
+                <h5 class="navTitle">Money Manager</h5>
+            </div>
+            <div>
+                <button class="btnLogout">Logout</button>
+            </div>
+    </div>
+</nav>
+<div class="landing container-fluid text-white">
+    <div class="row">
+        <div class="col-md-4 p-3">
+            <div class="card bg-primary">
+                <h4>Friday, March 04 2022</h4>
+            </div>
+        </div>
+        <div class="col-md-4 p-3">
+            <div class="card bg-card p-3">
+                <h3 class="cardTitle">Income</h3>
+
+            </div>
+        </div>
+        <div class="col-md-4 p-3">
+            <div class="card bg-card p-3">
+                <h3 class="cardTitle">Expense</h3>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="corner">
+    <button type="button" class="plusButton text-white bg-primary">+</button>
+</div>
+
+<nav class="navbar px-5 align-items-center fixed-bottom text-white">
+    <div class="container justify-content-center">
+        <!--        <div class="row ">-->
+        <div class="text-center">
+            <h6 class="footTitle">“Do not save what is left after spending, but spend what is left after saving. “ <br>
+                <span class="footAuthor">- Warren Buffet</span>
+            </h6>
+        </div>
+    </div>
+</nav>
+
+<script type="text/javascript">
+
+</script>
+}

@@ -1,0 +1,29 @@
+@()
+
+@main("Welcome to Play") {
+<h1>Welcome to Play!</h1>
+<button class="btn btn-primary" onclick="test()">Halo</button>
+<div class="test">
+
+</div>
+
+<script type="text/javascript">
+function test(){
+    console.log("Oke")
+    $.ajax({
+        url: 'api/v1/category',
+        type: 'GET',
+        success: function(response){
+            const {category_data} = response.res
+            $.each(category_data, function(res1, res2){
+                $(".test").append(
+                `<tr><td> ${res2.category_id} </td>
+                <td> ${res2.name} </td>
+                <td> <i class="${res2.icon}"></i></td></tr>`
+                )
+            })
+        }
+    })
+    }
+</script>
+}

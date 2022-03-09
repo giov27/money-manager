@@ -1,0 +1,28 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# https://www.playframework.com/documentation/latest/ScalaRouting
+# ~~~~
+
+# An example controller showing a sample home page
+GET     /                           controllers.HomeController.landing()
+
+# API
+GET     /api/v1/category-list              controllers.CategoryController.readCategoryList()
+GET     /api/v1/category/:id               controllers.CategoryController.readCategoryById(id: Int)
+POST    /api/v1/category-create            controllers.CategoryController.createCategory()
+DELETE  /api/v1/category-delete/:id        controllers.CategoryController.deleteCategoryById(id: Int)
+PUT     /api/v1/category-update/:id        controllers.CategoryController.updateCategoryById(id: Int)
+
+GET     /api/v1/ledger-list                controllers.LedgerController.readLedgerList()
+GET     /api/v1/ledger-list-by-date        controllers.LedgerController.readLedgerListByDate(date: String)
+GET     /api/v1/ledger/:id                 controllers.LedgerController.readLedgerById(id: Int)
+POST    /api/v1/ledger-create              controllers.LedgerController.createLedger()
+DELETE  /api/v1/ledger-delete/:id          controllers.LedgerController.deleteLedgerById(id: Int)
+PUT     /api/v1/ledger-update/:id          controllers.LedgerController.updateLedgerById(id: Int)
+GET     /api/v1/income-by-date             controllers.LedgerController.readIncomeByDate(date: String, type: String = "income")
+GET     /api/v1/expense-by-date            controllers.LedgerController.readExpenseByDate(date: String, type: String = "expense")
+
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

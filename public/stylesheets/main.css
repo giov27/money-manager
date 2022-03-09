@@ -1,0 +1,83 @@
+.profilePic{
+    width: 60px;
+    height: 60px;
+    border-radius: 20px;
+}
+
+.bgNavbar{
+    background-color:#383047;
+    border-bottom: 3px solid #000000;
+    box-sizing: border-box;
+    box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.btnLogout{
+    color: white;
+    background-color: #FA7844;
+    padding: 0.5rem 2rem;
+    border-radius: 15px;
+    border: none;
+    font-weight:800;
+}
+
+.navTitle{
+    font-weight: 900;
+    font-size: 28px;
+}
+
+.profileName{
+    font-weight: 700;
+    font-size: 22px;
+}
+
+.profileDesc{
+    /*color: hsl(0deg 0% 75%);*/
+    margin-top: 0;
+    font-size: 16px;
+}
+
+/* Landing */
+.landing{
+    height: 100vh;
+    width: 100vw;
+    background-color:#352D43;
+    padding-top: 5rem;
+}
+
+/* Card */
+.bg-card{
+    background-color: #3D344C !important;
+}
+
+.cardTitle{
+    font-weight: 700;
+}
+
+/*Footer*/
+.footTitle{
+    font-weight: 700;
+    font-size: 22px;
+}
+
+.footAuthor{
+    opacity: 80%;
+    margin-top: 0;
+    font-size: 16px;
+}
+
+.corner{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+
+}
+
+.plusButton{
+    border-radius: 50%;
+    border: 0px;
+    font-size: 32px;
+    font-weight: 800;
+    width: 50px;
+    height: 50px;
+    z-index:3;
+}
