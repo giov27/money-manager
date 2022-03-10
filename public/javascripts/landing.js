@@ -14,11 +14,13 @@ const nextDay = () => {
     today.setDate(today.getDate() + 1)
     $('.date').html(dateFormatUI(today));
     countData(today)
+    ledgerData(today)
 }
 const previousDay = () => {
     today.setDate(today.getDate() - 1)
     $('.date').html(dateFormatUI(today));
     countData(today)
+    ledgerData(today)
 }
 
 const dateFormatUI = (chosenDate) => {
@@ -65,6 +67,7 @@ const countData = async (date) => {
 }
 
 const ledgerData = (date) => {
+    $('.transactionDetail').empty()
     $.ajax({
         url: `api/v1/ledger-list-by-date?date=${dateFormatAPI(date)}`,
         type: 'get',
@@ -73,17 +76,19 @@ const ledgerData = (date) => {
             console.log(ledger_data)
             $.each(ledger_data, function(res1, res2){
                 $('.transactionDetail').append(
-                    `<div class="d-flex justify-content-between borderBottom">
+                    `<a href="/edit-ledger/${res2.ledger_id}" class="text-white text-decoration-none"><div class="d-flex justify-content-between borderBottom">
+
                         <div class="d-flex">
-                             <i class="${res2.category.icon}"></i>
+                             <i class="${res2.category.icon} transactionIcon"></i>
                              <div class="my-auto ms-3">
-                                 <p class="profileName my-auto"> ${res2.title} <br> <span class="profileDesc">${res2.category.name}</span></p>
+                                 <p class="profileName my-auto"> ${res2.title} <br> <span class="profileDesc text-capitalize">${res2.category.name} / ${res2.transaction_type}</span></p>
                              </div>
                          </div>
                          <div class="d-flex align-items-center">
                              <h5>Rp ${res2.amount}</h5>
                          </div>
-                     </div>`
+
+                     </div></a>`
                 )
             })
         }

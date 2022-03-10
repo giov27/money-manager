@@ -25,4 +25,12 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
   def landing() = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.landing())
   }
+
+  def add() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.add())
+  }
+
+  def edit(id: Int) = Action { implicit request: Request[AnyContent] =>
+    Ok("It's Work "+ id)
+  }
 }

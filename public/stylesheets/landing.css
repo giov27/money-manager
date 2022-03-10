@@ -103,6 +103,11 @@
   border-radius: 30px !important;
 }
 
+.transactionIcon{
+    font-size: 2rem;
+    margin: auto auto;
+}
+
 
 
 /*Footer */
@@ -115,4 +120,29 @@
     opacity: 80%;
     margin-top: 0;
     font-size: 10px;
+}
+
+
+/* Add Page */
+.cardBackground{
+    background-color: #50485D !important;
+    border-radius:15px !important;
+    box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.25);
+    padding: 1rem;
+}
+
+.addTitle{
+    font-weight: 800;
+    font-size: 18px;
+}
+
+.addButton{
+    background-color: #8A7CFB !important;
+    color: white !important;
+    font-weight: 800 !important;
+}
+
+.pillText{
+    font-size:10px;
+    font-weight: 700;
 }

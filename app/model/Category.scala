@@ -72,6 +72,29 @@ class CategoryDao @Inject()(DBApi: DBApi) {
     (status, message, sqlQuery)
   }
 
+  def getCategoryByName(category_name: String): (Boolean, String, Option[Category]) = db.withConnection { implicit c =>
+    // create a SqlQuery for all of the "select all" methods
+    var status: Boolean = true
+    var message: String = ""
+    var sqlQuery: Option[Category] = None
+    try {
+      sqlQuery = SQL(
+        s"""
+        SELECT *
+        FROM category
+        WHERE name = '$category_name'
+        """)
+        .as(category.singleOpt)
+      message = s"Berhasil mendapatkan data"
+    } catch {
+      case e: Exception => {
+        status = false
+        message = "Gagal mendapatkan data: err = " + e.toString
+      }
+    }
+    (status, message, sqlQuery)
+  }
+
   def delCategoryById(category_id: Int): (Boolean, String, Int) = db.withConnection { implicit c =>
     // create a SqlQuery for all of the "select all" methods
     var status: Boolean = true
@@ -128,9 +151,11 @@ class CategoryDao @Inject()(DBApi: DBApi) {
            |INSERT INTO category
            |(name, icon)
            |VALUES
-           |('${name}', '${icon}');
+           |('${name}', '${icon}')
+           |RETURNING category_id;
            |""".stripMargin
       ).executeInsert()
+      message = s"Berhasil menambahkan data"
     }catch {
       case e: Exception => {
         status = false

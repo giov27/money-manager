@@ -13,7 +13,7 @@ case class Ledger(
                    ledger_id: Int,
                    transaction_date: String,
                    transaction_type: String,
-                   category_id : Int,
+                   category_id : Long,
                    title: String,
                    amount: Double,
                    note: String,
