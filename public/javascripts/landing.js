@@ -42,28 +42,29 @@ const dateFormatAPI = (chosenDate) => {
     return format
 }
 
-const countData = async (date) => {
+const countData = (date) => {
     $.ajax({
         url: `api/v1/income-by-date?date=${dateFormatAPI(date)}`,
         type: 'get',
-        async: false,
+//        async: false,
         success: function(response){
             const {income_data} = response.res
             income = income_data
             $('.income').html(`Rp ${income_data}`)
         }
-    })
-    $.ajax({
-        url: `api/v1/expense-by-date?date=${dateFormatAPI(date)}`,
-        type: 'get',
-        success: function(response){
-            const {expense_data} = response.res
-            expense = expense_data
-            balance = income - expense
-            $('.expense').html(`Rp ${expense_data}`)
-            $('.balanceCurrent').html(`Rp ${balance}`)
-        }
-    })
+    }).done(()=>{
+        $.ajax({
+            url: `api/v1/expense-by-date?date=${dateFormatAPI(date)}`,
+            type: 'get',
+            success: function(response){
+                const {expense_data} = response.res
+                expense = expense_data
+                balance = income - expense
+                $('.expense').html(`Rp ${expense_data}`)
+                $('.balanceCurrent').html(`Rp ${balance}`)
+            }
+        })}
+    )
 }
 
 const ledgerData = (date) => {
@@ -76,7 +77,7 @@ const ledgerData = (date) => {
             console.log(ledger_data)
             $.each(ledger_data, function(res1, res2){
                 $('.transactionDetail').append(
-                    `<a href="/edit-ledger/${res2.ledger_id}" class="text-white text-decoration-none"><div class="d-flex justify-content-between borderBottom">
+                    `<a href="/edit-ledger?id=${res2.ledger_id}" class="text-white text-decoration-none"><div class="d-flex justify-content-between borderBottom">
 
                         <div class="d-flex">
                              <i class="${res2.category.icon} transactionIcon"></i>

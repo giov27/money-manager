@@ -72,10 +72,39 @@ class LedgerController @Inject()(
     val param = request.body.asJson.get
     val transaction_date = (param \ "transaction_date" ).asOpt[String].getOrElse("-")
     val transaction_type = (param \ "transaction_type" ).asOpt[String].getOrElse("-") //isi default icon
-    val category_id = (param \ "category_id").asOpt[Int].getOrElse(-1)
     val title = (param \ "title").asOpt[String].getOrElse("-")
-    val amount = (param \ "amount").asOpt[String].getOrElse("-").toDouble
+    val amount = (param \ "amount").asOpt[String].getOrElse("").toDouble
     val note = (param \ "note").asOpt[String].getOrElse("-")
+    val category_data = (param \ "category_id").asOpt[Long].getOrElse(
+      (param \ "category_id").as[String]
+    )
+    var category_id: Long = 0
+    if(category_data.isInstanceOf[String]){
+      val searchId : (Boolean, String, Option[Category]) = categoryDao.getCategoryByName(category_data.asInstanceOf[String])
+      if(searchId._3 != None){
+        category_id = searchId._3.get.category_id
+      }else{
+        val postCategory: (Boolean, String, Option[Long])= categoryDao.postCategory(category_data.asInstanceOf[String],"fas fa-question")
+        category_id = postCategory._3 match {
+          case None => -1
+          case Some(id: Long) => id
+        }
+        if(category_id == -1){
+          val json = Json.obj(
+            "metadata" -> Json.obj(
+              "status" -> postCategory._1,
+              "message" -> postCategory._2
+            )
+          )
+          Ok(json)
+          break;
+        }
+
+      }
+    }else{
+      category_id = category_data.asInstanceOf[Long]
+    }
+
     val ledger = Ledger(id, transaction_date, transaction_type, category_id, title, amount, note, null)
     val res: (Boolean, String, Int)= ledgerDao.putLedgerById(ledger)
     val json = Json.obj(

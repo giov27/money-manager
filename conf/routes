@@ -6,7 +6,7 @@
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.landing()
 GET     /add-ledger                 controllers.HomeController.add()
-GET     /edit-ledger/:id            controllers.HomeController.edit(id: Int)
+GET     /edit-ledger                controllers.HomeController.edit()
 
 # API
 GET     /api/v1/category-list              controllers.CategoryController.readCategoryList()

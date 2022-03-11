@@ -12,7 +12,10 @@ libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0
 libraryDependencies ++= Seq(
   jdbc,
   "org.playframework.anorm" %% "anorm" % "2.6.10",
-  "org.playframework.anorm" %% "anorm-postgres" % "2.6.10"
+  "org.playframework.anorm" %% "anorm-postgres" % "2.6.10",
+  "com.github.jwt-scala" %% "jwt-core" % "9.0.4",
+  "com.github.jwt-scala" %% "jwt-play" % "9.0.4",
+  "com.auth0" % "jwks-rsa" % "0.6.1",
 )
 
 // Adds additional packages into Twirl

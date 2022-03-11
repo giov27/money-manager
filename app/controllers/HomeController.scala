@@ -30,7 +30,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
     Ok(views.html.add())
   }
 
-  def edit(id: Int) = Action { implicit request: Request[AnyContent] =>
-    Ok("It's Work "+ id)
+  def edit() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.edit())
   }
 }

@@ -136,7 +136,7 @@
     font-size: 18px;
 }
 
-.addButton{
+.addButton, .editButton{
     background-color: #8A7CFB !important;
     color: white !important;
     font-weight: 800 !important;
@@ -145,4 +145,10 @@
 .pillText{
     font-size:10px;
     font-weight: 700;
+}
+
+/*Edit page*/
+.deleteButton{
+    color: white !important;
+    font-weight: 800 !important;
 }

@@ -108,8 +108,10 @@ class LedgerDao @Inject()(DBApi: DBApi, categoryDao: CategoryDao) {
       sqlQuery = SQL(
         s"""
         SELECT *
-        FROM ledger
-        WHERE ledger_id = ${id}
+        FROM ledger l
+        JOIN category c
+        ON l.category_id = c.category_id
+        WHERE l.ledger_id = ${id}
         """)
         .as(ledger.singleOpt)
       message = s"Berhasil mendapatkan data"

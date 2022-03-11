@@ -1,8 +1,3 @@
-var today = new Date();
-const days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
-const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-const months2 = ["01","02","03","04","05","06","07","08","09","10","11","12"]
-let income, expense, balance = 0
 
 $( document ).ready(function() {
     getCategoryList()
@@ -15,7 +10,6 @@ const addButton = () => {
     const category_data = $('#categoryIdAddForm').val() ? parseInt($('#categoryIdAddForm').val()) : $('#categoryAddForm').val();
     const amount = $('#amountAddForm').val();
     const note = $('#noteAddForm').val();
-    console.log(category_data)
     var json = {
        "transaction_date": date,
        "transaction_type": type,
@@ -71,4 +65,8 @@ const getCategoryList = () => {
             }
         }
     })
+}
+
+const closeButton = ()=> {
+    window.location.href = "/";
 }
