@@ -6,7 +6,7 @@ const registerButton = () => {
        "password": password,
     }
     $.ajax({
-        url: `api/v1/login`,
+        url: `api/v1/register`,
         type: 'POST',
         data: JSON.stringify(json),
         contentType: 'application/json; charset=utf-8',

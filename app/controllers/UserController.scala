@@ -82,6 +82,7 @@ class UserController @Inject()(
     val password = (param \ "password" ).asOpt[String].getOrElse("-")
     val user = User(0, username, cryptic.createPassword(password))
     val res: (Boolean, String, Option[Long])= userDao.postRegister(user)
+    print(res)
     val json = Json.obj(
       "metadata" -> Json.obj(
         "status" -> res._1,
