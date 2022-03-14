@@ -35,7 +35,7 @@ getLedgerDataById = ()=>{
 }
 
 const closeButton = ()=> {
-    window.location.href = "/";
+    window.location.href = "/ledger";
 }
 
 const deleteButton = ()=> {
@@ -43,7 +43,7 @@ const deleteButton = ()=> {
         url: `/api/v1/ledger-delete/${ledger_id}`,
         type: 'DELETE',
         success: function(response){
-            window.location.href = "/";
+            window.location.href = "/ledger";
         }
     })
 }
@@ -72,7 +72,7 @@ const editButton = ()=> {
         cache: false,
         dataType: "json",
         success: function(response){
-            window.location.href = "/";
+            window.location.href = "/ledger";
         }
     })
 }

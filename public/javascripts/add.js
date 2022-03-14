@@ -27,7 +27,7 @@ const addButton = () => {
         dataType: "json",
         success: function(response){
             console.log(response)
-            window.location.href = "/";
+            window.location.href = "/ledger";
         }
     })
 }
@@ -77,5 +77,5 @@ const getCategoryChange = () => {
 }
 
 const closeButton = ()=> {
-    window.location.href = "/";
+    window.location.href = "/ledger";
 }

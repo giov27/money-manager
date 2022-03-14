@@ -4,7 +4,7 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.HomeController.landing()
+GET     /ledger                     controllers.HomeController.landing()
 GET     /add-ledger                 controllers.HomeController.add()
 GET     /edit-ledger                controllers.HomeController.edit()
 GET     /login                      controllers.HomeController.login()
