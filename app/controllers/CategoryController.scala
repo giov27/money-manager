@@ -41,6 +41,21 @@ class CategoryController @Inject()(
     Ok(json)
   }
 
+  def readCategoryBySearch(name: String) = Action {
+    val res: (Boolean, String, List[Category])= categoryDao.getCategoryBySearch(name)
+    //    IF res_3 == null, redirect to 404(soon)
+    val json = Json.obj(
+      "metadata" -> Json.obj(
+        "status" -> res._1,
+        "message" -> res._2
+      ),
+      "res" -> Json.obj(
+        "category_data" -> res._3
+      )
+    )
+    Ok(json)
+  }
+
   def deleteCategoryById(id: Int) = Action {
     val res: (Boolean, String, Int)= categoryDao.delCategoryById(id)
     val json = Json.obj(
@@ -70,7 +85,6 @@ class CategoryController @Inject()(
 
   def createCategory() = Action { implicit request: Request[AnyContent] =>
     val param = request.body.asJson.get
-    print(param)
     val name = (param \ "categoryName" ).asOpt[String].getOrElse("-")
     val icon = (param \ "categoryIcon" ).asOpt[String].getOrElse("-") //isi default icon
 //    val category = Category(id, name, icon)

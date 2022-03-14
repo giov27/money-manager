@@ -10,7 +10,7 @@ import scala.util.control.Breaks.break
 class LedgerController @Inject()(
                                 val controllerComponents: ControllerComponents,
                                 val ledgerDao: LedgerDao,
-                                val categoryDao: CategoryDao
+                                val categoryDao: CategoryDao,
                                 )extends BaseController{
 
   import ledgerDao.ledgerFormat

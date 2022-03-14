@@ -22,7 +22,7 @@
                 <option value="expense">Expense</option>
             </select>
             <input type="number" class="form-control form-control-sm" placeholder="amount" id="amountAddForm">
-            <input type="text" class="form-control form-control-sm" placeholder="category" id="categoryAddForm">
+            <input type="text" class="form-control form-control-sm" placeholder="category" id="categoryAddForm" oninput="getCategoryChange()">
             <input type="hidden" class="form-control form-control-sm" placeholder="category" id="categoryIdAddForm">
             <input type="text" class="form-control form-control-sm" placeholder="note" id="noteAddForm">
             <button class="btn addButton" onclick="addButton()">Add</button>

@@ -95,6 +95,29 @@ class CategoryDao @Inject()(DBApi: DBApi) {
     (status, message, sqlQuery)
   }
 
+  def getCategoryBySearch(category_name: String): (Boolean, String, List[Category]) = db.withConnection { implicit c =>
+    // create a SqlQuery for all of the "select all" methods
+    var status: Boolean = true
+    var message: String = ""
+    var sqlQuery: List[Category] = List()
+    try {
+      sqlQuery = SQL(
+        s"""
+        SELECT *
+        FROM category
+        WHERE name LIKE '$category_name%'
+        """)
+        .as(category.*)
+      message = s"Berhasil mendapatkan data"
+    } catch {
+      case e: Exception => {
+        status = false
+        message = "Gagal mendapatkan data: err = " + e.toString
+      }
+    }
+    (status, message, sqlQuery)
+  }
+
   def delCategoryById(category_id: Int): (Boolean, String, Int) = db.withConnection { implicit c =>
     // create a SqlQuery for all of the "select all" methods
     var status: Boolean = true

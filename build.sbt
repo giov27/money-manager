@@ -16,6 +16,7 @@ libraryDependencies ++= Seq(
   "com.github.jwt-scala" %% "jwt-core" % "9.0.4",
   "com.github.jwt-scala" %% "jwt-play" % "9.0.4",
   "com.auth0" % "jwks-rsa" % "0.6.1",
+  "org.mindrot" % "jbcrypt" % "0.3m",
 )
 
 // Adds additional packages into Twirl

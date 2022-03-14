@@ -11,6 +11,7 @@ GET     /edit-ledger                controllers.HomeController.edit()
 # API
 GET     /api/v1/category-list              controllers.CategoryController.readCategoryList()
 GET     /api/v1/category/:id               controllers.CategoryController.readCategoryById(id: Int)
+GET     /api/v1/category-list-by-search    controllers.CategoryController.readCategoryBySearch(name: String)
 POST    /api/v1/category-create            controllers.CategoryController.createCategory()
 DELETE  /api/v1/category-delete/:id        controllers.CategoryController.deleteCategoryById(id: Int)
 PUT     /api/v1/category-update/:id        controllers.CategoryController.updateCategoryById(id: Int)
@@ -23,6 +24,10 @@ DELETE  /api/v1/ledger-delete/:id          controllers.LedgerController.deleteLe
 PUT     /api/v1/ledger-update/:id          controllers.LedgerController.updateLedgerById(id: Int)
 GET     /api/v1/income-by-date             controllers.LedgerController.readIncomeByDate(date: String, type: String = "income")
 GET     /api/v1/expense-by-date            controllers.LedgerController.readExpenseByDate(date: String, type: String = "expense")
+
+GET     /api/v1/user-list                  controllers.UserController.readUserList()
+POST    /api/v1/login                      controllers.UserController.login()
+POST    /api/v1/register                   controllers.UserController.register()
 
 
 
