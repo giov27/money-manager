@@ -1,0 +1,24 @@
+@()
+
+@templateMain("Money Manager") {
+<nav class="navbar px-5 align-items-center fixed-top bgNavbar text-white">
+    <div class="container">
+        <div class="mx-auto">
+            <h5 class="navTitle">Money Manager</h5>
+        </div>
+    </div>
+</nav>
+<div>
+    <div class="landing container-fluid text-white">
+        <div class="card cardBackground authCard  gap-2">
+            <h5 class="addTitle">Login</h5>
+            <input type="text" class="form-control" placeholder="Username" id="loginUsername">
+            <input type="text" class="form-control" placeholder="Password" id="loginPassword" >
+            <button class="btn addButton" onclick="loginButton()">Login</button>
+        </div>
+    </div>
+</div>
+
+<script src="@routes.Assets.versioned("javascripts/jquery-3.6.0.min.js")" type="text/javascript"></script>
+<script src="@routes.Assets.versioned("javascripts/login.js")" type="text/javascript"></script>
+}

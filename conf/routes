@@ -7,6 +7,9 @@
 GET     /                           controllers.HomeController.landing()
 GET     /add-ledger                 controllers.HomeController.add()
 GET     /edit-ledger                controllers.HomeController.edit()
+GET     /login                      controllers.HomeController.login()
+GET     /register                   controllers.HomeController.register()
+
 
 # API
 GET     /api/v1/category-list              controllers.CategoryController.readCategoryList()

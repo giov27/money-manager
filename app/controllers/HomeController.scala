@@ -33,4 +33,12 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
   def edit() = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.edit())
   }
+
+  def login() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.login())
+  }
+
+  def register() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.register())
+  }
 }
