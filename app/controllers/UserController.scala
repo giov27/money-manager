@@ -73,7 +73,17 @@ class UserController @Inject()(
         )
       }
     }
-    Ok(json)
+    Ok(json).withSession(request.session + ("connected" -> res._3.get.username))
+  }
+
+  def logout() = Action { implicit request: Request[AnyContent] =>
+    val json = Json.obj(
+      "metadata" -> Json.obj(
+      "status" -> true,
+      "message" -> "You succesfully logout"
+    ))
+    print("logout")
+    Ok(json).withSession(request.session - "connected")
   }
 
   def register() = Action {implicit request: Request[AnyContent] =>
@@ -82,7 +92,6 @@ class UserController @Inject()(
     val password = (param \ "password" ).asOpt[String].getOrElse("-")
     val user = User(0, username, cryptic.createPassword(password))
     val res: (Boolean, String, Option[Long])= userDao.postRegister(user)
-    print(res)
     val json = Json.obj(
       "metadata" -> Json.obj(
         "status" -> res._1,

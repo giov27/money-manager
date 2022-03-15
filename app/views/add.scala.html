@@ -11,21 +11,23 @@
 <div>
     <div class="landing container-fluid text-white">
         <div class="card cardBackground gap-2">
-            <div class="row">
-                <h5 class="addTitle col-10">Add Transaction</h5>
-                <button type="button" class="btn-close btn-close-white col-2" onclick="closeButton()" aria-label="Close"></button>
-            </div>
-            <input type="date" class="form-control form-control-sm" id="dateAddForm">
-            <input type="text" class="form-control form-control-sm" placeholder="title" id="titleAddForm">
-            <select class="form-select form-select-sm" id="typeAddForm">
-                <option value="income" selected>Income</option>
-                <option value="expense">Expense</option>
-            </select>
-            <input type="number" class="form-control form-control-sm" placeholder="amount" id="amountAddForm">
-            <input type="text" class="form-control form-control-sm" placeholder="category" id="categoryAddForm" oninput="getCategoryChange()">
-            <input type="hidden" class="form-control form-control-sm" placeholder="category" id="categoryIdAddForm">
-            <input type="text" class="form-control form-control-sm" placeholder="note" id="noteAddForm">
-            <button class="btn addButton" onclick="addButton()">Add</button>
+            <form class="gap-2 d-flex flex-column" onsubmit="addButton(e)" id="formAddSubmit">
+                <div class="row">
+                    <h5 class="addTitle col-10">Add Transaction</h5>
+                    <button type="button" class="btn-close btn-close-white col-2" onclick="closeButton()" aria-label="Close"></button>
+                </div>
+                <input type="date" class="form-control form-control-sm" id="dateAddForm" required>
+                <input type="text" class="form-control form-control-sm" placeholder="title" id="titleAddForm" required>
+                <select class="form-select form-select-sm" id="typeAddForm">
+                    <option value="income" selected>Income</option>
+                    <option value="expense">Expense</option>
+                </select>
+                <input type="number" class="form-control form-control-sm" placeholder="amount" id="amountAddForm" required>
+                <input type="text" class="form-control form-control-sm" placeholder="category" id="categoryAddForm" oninput="getCategoryChange()" required>
+                <input type="hidden" class="form-control form-control-sm" placeholder="category" id="categoryIdAddForm" required>
+                <textarea class="form-control form-control-sm" placeholder="note" id="noteAddForm"></textarea>
+                <button type="submit" class="btn addButton">Add</button>
+            </form>
         </div>
     </div>
 </div>

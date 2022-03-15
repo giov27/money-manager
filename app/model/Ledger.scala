@@ -216,7 +216,6 @@ class LedgerDao @Inject()(DBApi: DBApi, categoryDao: CategoryDao) {
         FROM ledger
         WHERE transaction_date = '${transaction_date}' AND transaction_type = '${transaction_type}';
         """)
-//        .as(scalar[Double].singleOpt)
         .as(countParser.singleOpt)
       message = s"Berhasil mendapatkan data"
     } catch {
@@ -228,6 +227,54 @@ class LedgerDao @Inject()(DBApi: DBApi, categoryDao: CategoryDao) {
         status = false
         message = "Gagal mendapatkan data: err = " + e.toString
         sqlQuery = Some(0)
+      }
+    }
+    (status, message, sqlQuery)
+  }
+
+  def getLedgerOverviewByWeek(transaction_date:String, transaction_type:String):(Boolean, String, List[Ledger]) = db.withConnection{implicit c =>
+    var status: Boolean = true
+    var message: String = ""
+    var sqlQuery: List[Ledger] = List()
+    try {
+      sqlQuery = SQL(
+        s"""
+          SELECT *
+          FROM ledger l
+          JOIN category c
+          ON l.category_id = c.category_id
+          WHERE transaction_date BETWEEN '2022-03-06' AND '2022-03-15';
+        """)
+        .as(ledger.*)
+      message = s"Berhasil mendapatkan data"
+    } catch {
+      case e: Exception => {
+        status = false
+        message = "Gagal mendapatkan data: err = " + e.toString
+      }
+    }
+    (status, message, sqlQuery)
+  }
+
+  def getLedgerCountByWeek():(Boolean, String, List[Ledger]) = db.withConnection{implicit c =>
+    var status: Boolean = true
+    var message: String = ""
+    var sqlQuery: List[Ledger] = List()
+    try {
+      sqlQuery = SQL(
+        s"""
+          SELECT *
+          FROM ledger l
+          JOIN category c
+          ON l.category_id = c.category_id
+          WHERE transaction_date BETWEEN '2022-03-06' AND '2022-03-15';
+        """)
+        .as(ledger.*)
+      message = s"Berhasil mendapatkan data"
+    } catch {
+      case e: Exception => {
+        status = false
+        message = "Gagal mendapatkan data: err = " + e.toString
       }
     }
     (status, message, sqlQuery)

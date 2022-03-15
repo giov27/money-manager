@@ -1,5 +1,9 @@
 $( document ).ready(function() {
     getLedgerDataById()
+    $('#formEditSubmit').submit((e)=>{
+        e.preventDefault()
+        editButton()
+    })
 });
 
 const months = ["01","02","03","04","05","06","07","08","09","10","11","12"]
@@ -63,7 +67,6 @@ const editButton = ()=> {
        "amount": amount,
        "note": note
     }
-    console.log(json)
     $.ajax({
         url: `/api/v1/ledger-update/${ledger_id}`,
         type: 'PUT',

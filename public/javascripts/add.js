@@ -1,5 +1,9 @@
 
 $( document ).ready(function() {
+    $('#formAddSubmit').submit((e)=>{
+        e.preventDefault();
+        addButton()
+    })
 //    getCategoryList()
 });
 
@@ -67,6 +71,7 @@ const getCategoryChange = () => {
                         )
                     })
                     $('.buttonPill').click((e)=>{
+                        e.preventDefault();
                         $('input[id="categoryAddForm"]').val(e.target.innerText)
                         $('input[id="categoryIdAddForm"]').val(e.currentTarget.id)
                     })

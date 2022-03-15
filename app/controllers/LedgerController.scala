@@ -79,7 +79,9 @@ class LedgerController @Inject()(
       (param \ "category_id").as[String]
     )
     var category_id: Long = 0
-    if(category_data.isInstanceOf[String]){
+    if(category_data.asInstanceOf[String].trim() == ""){
+      category_id = -1
+    }else if(category_data.isInstanceOf[String]){
       val searchId : (Boolean, String, Option[Category]) = categoryDao.getCategoryByName(category_data.asInstanceOf[String])
       if(searchId._3 != None){
         category_id = searchId._3.get.category_id
@@ -127,9 +129,11 @@ class LedgerController @Inject()(
       (param \ "category_id").as[String]
     )
     var category_id: Long = 0
-    if(category_data.isInstanceOf[String]){
+    if(category_data.asInstanceOf[String].trim() == ""){
+      category_id = -1
+    }else if(category_data.isInstanceOf[String]){
       val searchId : (Boolean, String, Option[Category]) = categoryDao.getCategoryByName(category_data.asInstanceOf[String])
-      if(searchId._3 != None){
+      if(searchId._3 != None ){
         category_id = searchId._3.get.category_id
       }else{
         val postCategory: (Boolean, String, Option[Long])= categoryDao.postCategory(category_data.asInstanceOf[String],"fas fa-question")

@@ -46,7 +46,6 @@ const countData = (date) => {
     $.ajax({
         url: `api/v1/income-by-date?date=${dateFormatAPI(date)}`,
         type: 'get',
-//        async: false,
         success: function(response){
             const {income_data} = response.res
             income = income_data
@@ -67,42 +66,23 @@ const countData = (date) => {
     )
 }
 
-const ledgerData = (date) => {
-    $('.transactionDetail').empty()
+const dateMonthly = ()=> {
+    var firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+    var lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+    var json = {
+        "firstDay" = firstDay,
+        "lastDay" = lastDay
+    }
     $.ajax({
-        url: `api/v1/ledger-list-by-date?date=${dateFormatAPI(date)}`,
-        type: 'get',
-        success: function(response){
-            const { ledger_data } = response.res
-            console.log(ledger_data)
-            $.each(ledger_data, function(res1, res2){
-                $('.transactionDetail').append(
-                    `<a href="/edit-ledger?id=${res2.ledger_id}" class="text-white text-decoration-none"><div class="d-flex justify-content-between borderBottom">
-
-                        <div class="d-flex">
-                             <i class="${res2.category.icon} transactionIcon"></i>
-                             <div class="my-auto ms-3">
-                                 <p class="profileName my-auto"> ${res2.title} <br> <span class="profileDesc text-capitalize">${res2.category.name} / ${res2.transaction_type}</span></p>
-                             </div>
-                         </div>
-                         <div class="d-flex align-items-center">
-                             <h5>Rp ${res2.amount}</h5>
-                         </div>
-
-                     </div></a>`
-                )
-            })
-        }
-    })
-}
-
-const logoutUser = ()=> {
-    $.ajax({
-        url: `api/v1/logout`,
-        type: 'get',
-        success: function(response){
-            window.location.href = "/login";
-            console.log(response)
-        }
-    })
+            url: `api/v1/`,
+            type: 'POST',
+            data: JSON.stringify(json),
+            contentType: 'application/json; charset=utf-8',
+            cache: false,
+            dataType: "json",
+            success: function(response){
+                console.log(response)
+//                window.location.href = "/ledger";
+            }
+        })
 }

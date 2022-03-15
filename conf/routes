@@ -7,8 +7,9 @@
 GET     /ledger                     controllers.HomeController.landing()
 GET     /add-ledger                 controllers.HomeController.add()
 GET     /edit-ledger                controllers.HomeController.edit()
-GET     /login                      controllers.HomeController.login()
+GET     /login                      controllers.HomeController.login(message ?= "")
 GET     /register                   controllers.HomeController.register()
+GET     /overview                   controllers.HomeController.overview()
 
 
 # API
@@ -30,7 +31,9 @@ GET     /api/v1/expense-by-date            controllers.LedgerController.readExpe
 
 GET     /api/v1/user-list                  controllers.UserController.readUserList()
 POST    /api/v1/login                      controllers.UserController.login()
+GET     /api/v1/logout                     controllers.UserController.logout()
 POST    /api/v1/register                   controllers.UserController.register()
+GET     /api/v1/overviewLedger             controllers.OverviewController.readLedgerByIntervalDate()
 
 
 

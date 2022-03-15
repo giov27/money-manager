@@ -23,7 +23,13 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
   }
 
   def landing() = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.landing())
+    val session = request.session.get("connected")
+    print(session)
+    if(session != None) {
+      Ok(views.html.landing())
+    } else{
+      Redirect(routes.HomeController.login("Please login first!"))
+    }
   }
 
   def add() = Action { implicit request: Request[AnyContent] =>
@@ -34,9 +40,10 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
     Ok(views.html.edit())
   }
 
-  def login() = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.login())
+  def login(message: String) = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.login(message))
   }
+
 
   def register() = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.register())

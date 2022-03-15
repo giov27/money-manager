@@ -11,24 +11,26 @@
 <div>
     <div class="landing container-fluid text-white">
         <div class="card cardBackground gap-2">
-            <div class="row">
-                <h5 class="addTitle col-10">Edit Transaction</h5>
-                <button type="button" class="btn-close btn-close-white col-2" onclick="closeButton()" aria-label="Close"></button>
-            </div>
-            <input type="date" class="form-control form-control-sm" id="dateEditForm">
-            <input type="text" class="form-control form-control-sm" placeholder="title" id="titleEditForm">
-            <select class="form-select form-select-sm" id="typeEditForm">
-                <option value="income">Income</option>
-                <option value="expense">Expense</option>
-            </select>
-            <input type="number" class="form-control form-control-sm" placeholder="amount" id="amountEditForm">
-            <input type="text" class="form-control form-control-sm" placeholder="category" id="categoryEditForm">
-            <input type="hidden" class="form-control form-control-sm" placeholder="category" id="categoryIdEditForm">
-            <input type="text" class="form-control form-control-sm" placeholder="note" id="noteEditForm">
-            <div class="row gap-3 p-3">
-                <button class="btn editButton col" onclick="editButton()">Edit</button>
-                <button class="btn deleteButton btn-danger col" onclick="deleteButton()">Delete</button>
-            </div>
+            <form class="d-flex flex-column gap-2" id="formEditSubmit" onsubmit="editButton()">
+                <div class="row">
+                    <h5 class="addTitle col-10">Edit Transaction</h5>
+                    <button type="button" class="btn-close btn-close-white col-2" onclick="closeButton()" aria-label="Close"></button>
+                </div>
+                <input type="date" class="form-control form-control-sm" id="dateEditForm" required>
+                <input type="text" class="form-control form-control-sm" placeholder="title" id="titleEditForm" required>
+                <select class="form-select form-select-sm" id="typeEditForm">
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                </select>
+                <input type="number" class="form-control form-control-sm" placeholder="amount" id="amountEditForm" required>
+                <input type="text" class="form-control form-control-sm" placeholder="category" id="categoryEditForm" required>
+                <input type="hidden" class="form-control form-control-sm" placeholder="category" id="categoryIdEditForm">
+                <textarea class="form-control form-control-sm" placeholder="note" id="noteEditForm"></textarea>
+                <div class="row gap-3 p-3">
+                    <button type="submit" class="btn editButton col" >Edit</button>
+                    <button class="btn deleteButton btn-danger col" onclick="deleteButton()">Delete</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

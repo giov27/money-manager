@@ -49,6 +49,12 @@
     top:-0.5rem;
 }
 
+.logoutButton{
+    position: absolute;
+    top: 1px;
+    right: 1vw;
+}
+
 /* Card */
 .cardDate{
     margin-top:1rem;
