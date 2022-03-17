@@ -4,7 +4,7 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /ledger                     controllers.HomeController.landing()
+GET     /                           controllers.HomeController.landing()
 GET     /add-ledger                 controllers.HomeController.add()
 GET     /edit-ledger                controllers.HomeController.edit()
 GET     /login                      controllers.HomeController.login(message ?= "")
@@ -17,6 +17,7 @@ GET     /api/v1/category-list              controllers.CategoryController.readCa
 GET     /api/v1/category/:id               controllers.CategoryController.readCategoryById(id: Int)
 GET     /api/v1/category-list-by-search    controllers.CategoryController.readCategoryBySearch(name: String)
 POST    /api/v1/category-create            controllers.CategoryController.createCategory()
+POST    /api/v1/category-create-json       controllers.CategoryController.createCategoryJson()
 DELETE  /api/v1/category-delete/:id        controllers.CategoryController.deleteCategoryById(id: Int)
 PUT     /api/v1/category-update/:id        controllers.CategoryController.updateCategoryById(id: Int)
 

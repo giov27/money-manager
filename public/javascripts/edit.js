@@ -4,6 +4,9 @@ $( document ).ready(function() {
         e.preventDefault()
         editButton()
     })
+    $('#amountEditForm').keyup((e)=>{
+        $('#amountEditForm').val(formatRupiah(e.target.value, 'Rp. '));
+    })
 });
 
 const months = ["01","02","03","04","05","06","07","08","09","10","11","12"]
@@ -20,26 +23,45 @@ const dateFormatAPI = (chosenDate) => {
     return format
 }
 
+const formatRupiah = (number, prefix) =>
+    {
+        var number_string = number.replace(/[^,\d]/g, '').toString(),
+            split    = number_string.split(','),
+            rest     = split[0].length % 3,
+            rupiah   = split[0].substr(0, rest),
+            thousand = split[0].substr(rest).match(/\d{3}/gi);
+
+        if (thousand) {
+            separator = rest ? '.' : '';
+            rupiah += separator + thousand.join('.');
+        }
+
+        rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+        return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+
+    }
+
 getLedgerDataById = ()=>{
     $.ajax({
             url: `api/v1/ledger/${ledger_id}`,
             type: 'get',
             success: function(response){
                 const { ledger_data } = response.res
+                console.log(ledger_data)
                 dateDb = ledger_data.transaction_date.split("/")
                 date = new Date(`${dateDb[1]}/${dateDb[0]}/20${dateDb[2]}`)
                 $('#dateEditForm').val(dateFormatAPI(date));
                 $('#typeEditForm').val(ledger_data.transaction_type).change();
                 $('#titleEditForm').val(ledger_data.title);
                 $('#categoryEditForm').val(ledger_data.category.name);
-                $('#amountEditForm').val(ledger_data.amount);
+                $('#amountEditForm').val(formatRupiah(ledger_data.amount.toString(), 'Rp. '));
                 $('#noteEditForm').val(ledger_data.note);
             }
         })
 }
 
 const closeButton = ()=> {
-    window.location.href = "/ledger";
+    window.location.href = "/";
 }
 
 const deleteButton = ()=> {
@@ -47,17 +69,19 @@ const deleteButton = ()=> {
         url: `/api/v1/ledger-delete/${ledger_id}`,
         type: 'DELETE',
         success: function(response){
-            window.location.href = "/ledger";
+            window.location.href = "/";
         }
     })
 }
+
+
 
 const editButton = ()=> {
     const date = $('#dateEditForm').val();
     const type = $('#typeEditForm').find(":selected").val();
     const title = $('#titleEditForm').val();
     const category_data = $('#categoryIdEditForm').val() ? parseInt($('#categoryIdEditForm').val()) : $('#categoryEditForm').val();
-    const amount = $('#amountEditForm').val();
+    const amount = $('#amountEditForm').val().replace(/\D/g,'');
     const note = $('#noteEditForm').val();
     var json = {
        "transaction_date": date,
@@ -75,7 +99,7 @@ const editButton = ()=> {
         cache: false,
         dataType: "json",
         success: function(response){
-            window.location.href = "/ledger";
+            window.location.href = "/";
         }
     })
 }

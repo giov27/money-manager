@@ -14,7 +14,7 @@ const loginButton = () => {
         dataType: "json",
         success: function(response){
             console.log(response)
-            window.location.href = "/ledger";
+            window.location.href = "/";
         }
     })
 }

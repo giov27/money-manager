@@ -1,7 +1,7 @@
 package controllers
 
 import model.{Category, CategoryDao}
-import play.api.libs.json.Json
+import play.api.libs.json.{JsValue, Json}
 import play.api.mvc.{AnyContent, BaseController, ControllerComponents, Request}
 
 import javax.inject.Inject
@@ -88,6 +88,25 @@ class CategoryController @Inject()(
     val name = (param \ "categoryName" ).asOpt[String].getOrElse("-")
     val icon = (param \ "categoryIcon" ).asOpt[String].getOrElse("-") //isi default icon
 //    val category = Category(id, name, icon)
+    val res: (Boolean, String, Option[Long])= categoryDao.postCategory(name, icon)
+    val json = Json.obj(
+      "metadata" -> Json.obj(
+        "status" -> res._1,
+        "message" -> res._2
+      ),
+      "res" -> Json.obj(
+        "category_data" -> res._3
+      )
+    )
+    Ok(json)
+  }
+
+  def createCategoryJson() = Action(parse.json) { implicit request: Request[JsValue] =>
+    val param = request.body
+    print(param)
+    val name = (param \ "categoryName" ).asOpt[String].getOrElse("-")
+    val icon = (param \ "categoryIcon" ).asOpt[String].getOrElse("-") //isi default icon
+    //    val category = Category(id, name, icon)
     val res: (Boolean, String, Option[Long])= categoryDao.postCategory(name, icon)
     val json = Json.obj(
       "metadata" -> Json.obj(

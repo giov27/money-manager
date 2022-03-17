@@ -9,8 +9,9 @@ import play.api.mvc._
  * application's home page.
  */
 @Singleton
-class HomeController @Inject()(val controllerComponents: ControllerComponents) extends BaseController {
-
+class HomeController @Inject()(
+                                controllerComponents: ControllerComponents,
+                              ) extends AbstractController(controllerComponents) {
   /**
    * Create an Action to render an HTML page.
    *
@@ -23,13 +24,12 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
   }
 
   def landing() = Action { implicit request: Request[AnyContent] =>
-    val session = request.session.get("connected")
-    print(session)
-    if(session != None) {
+    val sessionOpt = request.session.get("connected")
+    sessionOpt.map{ session =>
       Ok(views.html.landing())
-    } else{
+    }.getOrElse(
       Redirect(routes.HomeController.login("Please login first!"))
-    }
+    )
   }
 
   def add() = Action { implicit request: Request[AnyContent] =>

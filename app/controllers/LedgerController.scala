@@ -78,33 +78,36 @@ class LedgerController @Inject()(
     val category_data = (param \ "category_id").asOpt[Long].getOrElse(
       (param \ "category_id").as[String]
     )
-    var category_id: Long = 0
-    if(category_data.asInstanceOf[String].trim() == ""){
-      category_id = -1
-    }else if(category_data.isInstanceOf[String]){
-      val searchId : (Boolean, String, Option[Category]) = categoryDao.getCategoryByName(category_data.asInstanceOf[String])
-      if(searchId._3 != None){
-        category_id = searchId._3.get.category_id
-      }else{
-        val postCategory: (Boolean, String, Option[Long])= categoryDao.postCategory(category_data.asInstanceOf[String],"fas fa-question")
-        category_id = postCategory._3 match {
-          case None => -1
-          case Some(id: Long) => id
-        }
-        if(category_id == -1){
-          val json = Json.obj(
-            "metadata" -> Json.obj(
-              "status" -> postCategory._1,
-              "message" -> postCategory._2
-            )
-          )
-          Ok(json)
-          break;
-        }
-
+    val category_id = category_data match{
+      case l : Long  => {
+        category_data.asInstanceOf[Long]
       }
-    }else{
-      category_id = category_data.asInstanceOf[Long]
+      case s: String => {
+        if(category_data.asInstanceOf[String].trim() == ""){
+          -1
+        }else {
+          val searchId : (Boolean, String, Option[Category]) = categoryDao.getCategoryByName(category_data.asInstanceOf[String])
+          if(searchId._3 != None ){
+            searchId._3.get.category_id
+          }else{
+            val postCategory: (Boolean, String, Option[Long])= categoryDao.postCategory(category_data.asInstanceOf[String],"fas fa-question")
+            postCategory._3 match {
+              case None => {
+                val json = Json.obj(
+                  "metadata" -> Json.obj(
+                    "status" -> postCategory._1,
+                    "message" -> postCategory._2
+                  )
+                )
+                Ok(json)
+                break
+                -1
+              }
+              case Some(id: Long) => id
+            }
+          }
+        }
+      }
     }
 
     val ledger = Ledger(id, transaction_date, transaction_type, category_id, title, amount, note, null)
@@ -128,34 +131,39 @@ class LedgerController @Inject()(
     val category_data = (param \ "category_id").asOpt[Long].getOrElse(
       (param \ "category_id").as[String]
     )
-    var category_id: Long = 0
-    if(category_data.asInstanceOf[String].trim() == ""){
-      category_id = -1
-    }else if(category_data.isInstanceOf[String]){
-      val searchId : (Boolean, String, Option[Category]) = categoryDao.getCategoryByName(category_data.asInstanceOf[String])
-      if(searchId._3 != None ){
-        category_id = searchId._3.get.category_id
-      }else{
-        val postCategory: (Boolean, String, Option[Long])= categoryDao.postCategory(category_data.asInstanceOf[String],"fas fa-question")
-        category_id = postCategory._3 match {
-          case None => -1
-          case Some(id: Long) => id
-        }
-        if(category_id == -1){
-          val json = Json.obj(
-            "metadata" -> Json.obj(
-              "status" -> postCategory._1,
-              "message" -> postCategory._2
-            )
-          )
-          Ok(json)
-          break
-        }
 
+    val category_id = category_data match{
+      case l : Long  => {
+        category_data.asInstanceOf[Long]
       }
-    }else{
-      category_id = category_data.asInstanceOf[Long]
+      case s: String => {
+        if(category_data.asInstanceOf[String].trim() == ""){
+           -1
+        }else {
+          val searchId : (Boolean, String, Option[Category]) = categoryDao.getCategoryByName(category_data.asInstanceOf[String])
+          if(searchId._3 != None ){
+            searchId._3.get.category_id
+          }else{
+            val postCategory: (Boolean, String, Option[Long])= categoryDao.postCategory(category_data.asInstanceOf[String],"fas fa-question")
+            postCategory._3 match {
+              case None => {
+                val json = Json.obj(
+                  "metadata" -> Json.obj(
+                    "status" -> postCategory._1,
+                    "message" -> postCategory._2
+                  )
+                )
+                Ok(json)
+                break
+                -1
+              }
+              case Some(id: Long) => id
+            }
+          }
+        }
+      }
     }
+
 
     val ledger = Ledger(0, transaction_date, transaction_type, category_id, title, amount, note, null)
 

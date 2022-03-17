@@ -1,18 +1,49 @@
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?<!\,\d*)(?=(\d{3})+(?!\d))/g, ".");
+}
 
 $( document ).ready(function() {
     $('#formAddSubmit').submit((e)=>{
         e.preventDefault();
         addButton()
     })
-//    getCategoryList()
+    $('#amountAddForm').keyup((e)=>{
+        $('#amountAddForm').val(formatRupiah(e.target.value, 'Rp. '));
+    })
+//    $('#amountAddForm').val().replace(/\B(?<!\,\d*)(?=(\d{3})+(?!\d))/g, ".")
 });
 
+//var rupiah_currency = document.getElementById('amountAddForm');
+//rupiah_currency.addEventListener('keyup', function(e)
+//{
+//    rupiah_currency.value = formatRupiah(this.value, 'Rp. ');
+//});
+
+const formatRupiah = (number, prefix) =>
+    {
+        var number_string = number.replace(/[^,\d]/g, '').toString(),
+            split    = number_string.split(','),
+            rest     = split[0].length % 3,
+            rupiah   = split[0].substr(0, rest),
+            thousand = split[0].substr(rest).match(/\d{3}/gi);
+
+        if (thousand) {
+            separator = rest ? '.' : '';
+            rupiah += separator + thousand.join('.');
+        }
+
+        rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+        return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+
+    }
+
 const addButton = () => {
+    console.log("hit")
     const date = $('#dateAddForm').val();
     const type = $('#typeAddForm').find(":selected").val();
     const title = $('#titleAddForm').val();
     const category_data = $('#categoryIdAddForm').val() ? parseInt($('#categoryIdAddForm').val()) : $('#categoryAddForm').val();
-    const amount = $('#amountAddForm').val();
+    const amount = $('#amountAddForm').val().replace(/\D/g,'');
     const note = $('#noteAddForm').val();
     var json = {
        "transaction_date": date,
@@ -30,20 +61,15 @@ const addButton = () => {
         cache: false,
         dataType: "json",
         success: function(response){
-            console.log(response)
-            window.location.href = "/ledger";
+            window.location.href = "/";
         }
     })
 }
 
-const categoryChange = () => {
-    console.log($('#categoryAddForm').val())
-
-
-}
-
 const getCategoryChange = () => {
     $('#buttonsPill').remove();
+    $('input[id="categoryIdAddForm"]').val('')
+    console.log($('input[id="categoryIdAddForm"]').val())
     const formInput = $('#categoryAddForm').val()
     const value = formInput.charAt(0).toUpperCase() + formInput.slice(1);
 
@@ -59,13 +85,11 @@ const getCategoryChange = () => {
             type: 'GET',
             success: function(response){
                 const { category_data } = response.res
-                console.log(category_data)
                 if(category_data.length > 0 ){
                     $('#categoryAddForm').after(
                         '<div class="row gap-2" id="buttonsPill"></div>'
                     )
                     category_data.forEach((item, i)=>{
-                        console.log(item)
                         $('#buttonsPill').append(
                             buttonPill(item)
                         )
@@ -74,6 +98,7 @@ const getCategoryChange = () => {
                         e.preventDefault();
                         $('input[id="categoryAddForm"]').val(e.target.innerText)
                         $('input[id="categoryIdAddForm"]').val(e.currentTarget.id)
+                        console.log($('input[id="categoryIdAddForm"]').val())
                     })
                 }
             }
@@ -82,5 +107,5 @@ const getCategoryChange = () => {
 }
 
 const closeButton = ()=> {
-    window.location.href = "/ledger";
+    window.location.href = "/";
 }

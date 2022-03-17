@@ -4,6 +4,10 @@ const months = ["January", "February", "March", "April", "May", "June", "July", 
 const months2 = ["01","02","03","04","05","06","07","08","09","10","11","12"]
 let income, expense, balance = 0
 
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?<!\,\d*)(?=(\d{3})+(?!\d))/g, ".");
+}
+
 $( document ).ready(function() {
     $('.date').html(dateFormatUI(today));
     countData(today)
@@ -49,8 +53,9 @@ const countData = (date) => {
 //        async: false,
         success: function(response){
             const {income_data} = response.res
+            const currencyFormat = numberWithCommas(income_data)
             income = income_data
-            $('.income').html(`Rp ${income_data}`)
+            $('.income').html(`Rp ${currencyFormat}`)
         }
     }).done(()=>{
         $.ajax({
@@ -58,10 +63,12 @@ const countData = (date) => {
             type: 'get',
             success: function(response){
                 const {expense_data} = response.res
+                const currencyFormat = numberWithCommas(expense_data)
                 expense = expense_data
                 balance = income - expense
-                $('.expense').html(`Rp ${expense_data}`)
-                $('.balanceCurrent').html(`Rp ${balance}`)
+                const currencyFormatBalance = numberWithCommas(balance)
+                $('.expense').html(`Rp ${currencyFormat}`)
+                $('.balanceCurrent').html(`Rp ${currencyFormatBalance}`)
             }
         })}
     )
@@ -76,6 +83,7 @@ const ledgerData = (date) => {
             const { ledger_data } = response.res
             console.log(ledger_data)
             $.each(ledger_data, function(res1, res2){
+                const currencyFormat = numberWithCommas(res2.amount)
                 $('.transactionDetail').append(
                     `<a href="/edit-ledger?id=${res2.ledger_id}" class="text-white text-decoration-none"><div class="d-flex justify-content-between borderBottom">
 
@@ -86,7 +94,7 @@ const ledgerData = (date) => {
                              </div>
                          </div>
                          <div class="d-flex align-items-center">
-                             <h5>Rp ${res2.amount}</h5>
+                             <h5>Rp ${currencyFormat} </h5>
                          </div>
 
                      </div></a>`
